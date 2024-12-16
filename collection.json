@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "675c1e242d11301b753d8d65"
+  },
+  "title": "The Pragmatic Programmer",
+  "authors": [
+    {
+      "name": "Andrew Hunt",
+      "country": "UK"
+    },
+    {
+      "name": "David Thomas",
+      "country": "UK"
+    }
+  ],
+  "categories": [
+    "Programming",
+    "Software Development"
+  ],
+  "price": 39.99,
+  "stock": 120,
+  "publisher": {
+    "name": "Addison-Wesley",
+    "location": "USA"
+  }
+},
+{
+  "_id": {
+    "$oid": "675c1e6d2d11301b753d8d67"
+  },
+  "title": "Clean Code",
+  "authors": [
+    {
+      "name": "Robert C. Martin",
+      "country": "USA"
+    }
+  ],
+  "categories": [
+    "Programming",
+    "Software Engineering"
+  ],
+  "price": 42.99,
+  "stock": 80,
+  "publisher": {
+    "name": "Prentice Hall",
+    "location": "USA"
+  }
+},
+{
+  "_id": {
+    "$oid": "675c1f652d11301b753d8d6d"
+  },
+  "title": "You Don't Know JS",
+  "authors": [
+    {
+      "name": "Kyle Simpson",
+      "country": "USA"
+    }
+  ],
+  "categories": [
+    "Programming",
+    "JavaScript"
+  ],
+  "price": 35,
+  "stock": 50,
+  "publisher": {
+    "name": "O'Reilly Media",
+    "location": "USA"
+  }
+},
+{
+  "_id": {
+    "$oid": "675c1fa62d11301b753d8d6f"
+  },
+  "title": "Introduction to Algorithms",
+  "authors": [
+    {
+      "name": "Thomas H. Cormen",
+      "country": "USA"
+    },
+    {
+      "name": "Charles E. Leiserson",
+      "country": "Uk"
+    },
+    {
+      "name": "Ronald L. Rivest",
+      "country": "USA"
+    },
+    {
+      "name": "Clifford Stein",
+      "country": "USA"
+    }
+  ],
+  "categories": [
+    "Algorithms",
+    "Computer Science"
+  ],
+  "price": 89.95,
+  "stock": 30,
+  "publisher": {
+    "name": "MIT Press",
+    "location": "Uk"
+  }
+}]
