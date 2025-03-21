@@ -1,0 +1,313 @@
+### 1. **Insert Document** (`insertOne`, `insertMany`)
+```js
+db.users.insertOne({ name: "Alice", age: 25, city: "New York" });
+```
+```js
+db.users.insertMany([
+  { name: "Bob", age: 30, city: "San Francisco" },
+  { name: "Charlie", age: 28, city: "Chicago" }
+]);
+```
+
+### 2. **Find Documents** (`find`, `findOne`)
+```js
+db.users.find({ city: "New York" });
+```
+```js
+db.users.findOne({ name: "Alice" });
+```
+
+### 3. **Update Documents** (`updateOne`, `updateMany`, `replaceOne`)
+```js
+db.users.updateOne({ name: "Alice" }, { $set: { age: 26 } });
+```
+```js
+db.users.updateMany({ city: "New York" }, { $set: { country: "USA" } });
+```
+```js
+db.users.replaceOne({ name: "Alice" }, { name: "Alice", age: 27, city: "Los Angeles" });
+```
+
+### 4. **Delete Documents** (`deleteOne`, `deleteMany`)
+```js
+db.users.deleteOne({ name: "Alice" });
+```
+```js
+db.users.deleteMany({ city: "New York" });
+```
+
+### 5. **Query with Operators** (`$gt`, `$lt`, `$gte`, `$lte`, `$ne`, `$in`, `$nin`)
+```js
+db.users.find({ age: { $gt: 25 } });
+```
+```js
+db.users.find({ city: { $in: ["New York", "San Francisco"] } });
+```
+
+### 6. **Sorting (`sort`)**
+```js
+db.users.find().sort({ age: -1 }); // Descending order
+```
+
+### 7. **Limiting Results (`limit`)**
+```js
+db.users.find().limit(2);
+```
+
+### 8. **Skipping Documents (`skip`)**
+```js
+db.users.find().skip(2);
+```
+
+### 9. **Aggregation (`aggregate`)**
+```js
+db.users.aggregate([
+  { $match: { city: "New York" } },
+  { $group: { _id: "$city", avgAge: { $avg: "$age" } } }
+]);
+```
+
+### 10. **Indexing (`createIndex`)**
+```js
+db.users.createIndex({ name: 1 });
+```
+
+### 11. **Text Search (`$text`, `createIndex` for text)**
+```js
+db.users.createIndex({ name: "text" });
+db.users.find({ $text: { $search: "Alice" } });
+```
+
+### 12. **Projection (`find` with fields)**
+```js
+db.users.find({ name: "Alice" }, { _id: 0, name: 1, age: 1 });
+```
+
+### 13. **Counting Documents (`countDocuments`)**
+```js
+db.users.countDocuments({ city: "New York" });
+```
+
+### 14. **Distinct Values (`distinct`)**
+```js
+db.users.distinct("city");
+```
+
+### 15. **Updating with Array Operators (`$push`, `$pull`, `$addToSet`)**
+```js
+db.users.updateOne({ name: "Alice" }, { $push: { hobbies: "reading" } });
+```
+```js
+db.users.updateOne({ name: "Alice" }, { $pull: { hobbies: "reading" } });
+```
+```js
+db.users.updateOne({ name: "Alice" }, { $addToSet: { hobbies: "traveling" } });
+```
+
+
+
+
+
+---
+
+### 16. **Find and Modify (`findOneAndUpdate`, `findOneAndDelete`)**
+```js
+db.users.findOneAndUpdate({ name: "Alice" }, { $set: { age: 28 } });
+```
+```js
+db.users.findOneAndDelete({ name: "Alice" });
+```
+
+---
+
+### 17. **Exists Operator (`$exists`)**
+```js
+db.users.find({ country: { $exists: true } });
+```
+
+---
+
+### 18. **Type Operator (`$type`)**
+```js
+db.users.find({ age: { $type: "number" } });
+```
+
+---
+
+### 19. **Regex Search (`$regex`)**
+```js
+db.users.find({ name: { $regex: /^A/i } }); // Names starting with "A" (case insensitive)
+```
+
+---
+
+### 20. **Modulus Operator (`$mod`)**
+```js
+db.users.find({ age: { $mod: [2, 0] } }); // Find users with even age
+```
+
+---
+
+### 21. **Where Query (`$where`)**
+```js
+db.users.find({ $where: "this.age > 25" });
+```
+
+---
+
+### 22. **Element Match (`$elemMatch`)** (For array fields)
+```js
+db.users.find({ scores: { $elemMatch: { subject: "Math", score: { $gt: 80 } } } });
+```
+
+---
+
+### 23. **Size Query (`$size`)** (Find arrays with specific length)
+```js
+db.users.find({ hobbies: { $size: 3 } });
+```
+
+---
+
+### 24. **Bitwise Query (`$bitsAllSet`, `$bitsAnySet`, `$bitsAllClear`, `$bitsAnyClear`)**
+```js
+db.users.find({ permissions: { $bitsAllSet: [1, 3] } });
+```
+
+---
+
+### 25. **Geospatial Queries (`$geoWithin`, `$near`)**
+```js
+db.locations.find({ location: { $near: { $geometry: { type: "Point", coordinates: [40, -73] }, $maxDistance: 5000 } } });
+```
+
+---
+
+### 26. **Unsetting a Field (`$unset`)**
+```js
+db.users.updateOne({ name: "Alice" }, { $unset: { age: "" } });
+```
+
+---
+
+### 27. **Rename a Field (`$rename`)**
+```js
+db.users.updateMany({}, { $rename: { "oldField": "newField" } });
+```
+
+---
+
+### 28. **Increment or Decrement a Value (`$inc`, `$mul`)**
+```js
+db.users.updateOne({ name: "Alice" }, { $inc: { age: 1 } }); // Increments age by 1
+```
+```js
+db.users.updateOne({ name: "Alice" }, { $mul: { age: 2 } }); // Multiplies age by 2
+```
+
+---
+
+### 29. **Upsert (Update or Insert if Not Exists)**
+```js
+db.users.updateOne({ name: "David" }, { $set: { age: 35 } }, { upsert: true });
+```
+
+---
+
+### 30. **Bulk Write Operations (`bulkWrite`)**
+```js
+db.users.bulkWrite([
+  { insertOne: { document: { name: "Eve", age: 22 } } },
+  { updateOne: { filter: { name: "Bob" }, update: { $set: { age: 31 } } } },
+  { deleteOne: { filter: { name: "Charlie" } } }
+]);
+```
+
+---
+
+### 31. **Lookup (Joining Collections)**
+```js
+db.orders.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "userId",
+      foreignField: "_id",
+      as: "userDetails"
+    }
+  }
+]);
+```
+
+---
+
+### 32. **Faceted Search (`$facet`)**
+```js
+db.products.aggregate([
+  {
+    $facet: {
+      priceStats: [{ $group: { _id: null, avgPrice: { $avg: "$price" } } }],
+      categoryCount: [{ $group: { _id: "$category", count: { $sum: 1 } } }]
+    }
+  }
+]);
+```
+
+---
+
+### 33. **Conditional Aggregation (`$cond`)**
+```js
+db.users.aggregate([
+  {
+    $project: {
+      name: 1,
+      ageGroup: { $cond: { if: { $gte: ["$age", 30] }, then: "Senior", else: "Junior" } }
+    }
+  }
+]);
+```
+
+---
+
+### 34. **Bucket Aggregation (`$bucket`)**
+```js
+db.users.aggregate([
+  {
+    $bucket: {
+      groupBy: "$age",
+      boundaries: [0, 18, 30, 50, 100],
+      default: "Other",
+      output: { count: { $sum: 1 } }
+    }
+  }
+]);
+```
+
+---
+
+### 35. **Merge Aggregation (`$merge`)** (Store results in another collection)
+```js
+db.sales.aggregate([
+  { $group: { _id: "$category", total: { $sum: "$amount" } } },
+  { $merge: { into: "salesSummary", whenMatched: "merge", whenNotMatched: "insert" } }
+]);
+```
+
+---
+
+### 36. **Graph Lookup (`$graphLookup`)** (Recursive Relationships)
+```js
+db.employees.aggregate([
+  {
+    $graphLookup: {
+      from: "employees",
+      startWith: "$managerId",
+      connectFromField: "managerId",
+      connectToField: "_id",
+      as: "hierarchy"
+    }
+  }
+]);
+```
+
+---
